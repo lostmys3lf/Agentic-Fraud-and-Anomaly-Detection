@@ -1,0 +1,281 @@
+complaint_id,customer_id,timestamp,channel,complaint_text,related_to_fraud_case
+CMP00095,CUST10341,2026-04-01 10:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00259,CUST10222,2026-04-01 18:00:00,app_ticket,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00029,CUST10760,2026-04-01 19:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00016,CUST10915,2026-04-01 20:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00100,CUST10703,2026-04-01 21:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00202,CUST10577,2026-04-01 21:00:00,live_chat,Customer reported slow internet connection in Pekanbaru area during evening hours. Ticket escalated to network team.,0
+CMP00025,CUST10149,2026-04-02 17:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00197,CUST10976,2026-04-02 17:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00181,CUST10489,2026-04-02 21:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00123,CUST10631,2026-04-03 12:00:00,app_ticket,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00054,CUST10343,2026-04-03 16:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00101,CUST11114,2026-04-04 08:00:00,live_chat,Customer reported slow internet connection in Balikpapan area during evening hours. Ticket escalated to network team.,0
+CMP00279,CUST10933,2026-04-04 18:00:00,call_center,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00185,CUST10818,2026-04-04 21:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00247,CUST10704,2026-04-05 00:00:00,app_ticket,"Customer claims they did not perform the SIM swap registered on their account in Surabaya, requesting immediate investigation and account freeze.",1
+CMP00019,CUST10514,2026-04-05 09:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00229,CUST10537,2026-04-05 17:00:00,live_chat,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00021,CUST10655,2026-04-06 08:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00212,CUST10051,2026-04-06 09:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00058,CUST10886,2026-04-06 14:00:00,email,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00141,CUST11059,2026-04-07 18:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00205,CUST10730,2026-04-07 19:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Bandung. Provided rate card information.,0
+CMP00178,CUST10283,2026-04-08 16:00:00,live_chat,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00142,CUST10574,2026-04-09 07:00:00,call_center,Customer reported slow internet connection in Denpasar area during evening hours. Ticket escalated to network team.,0
+CMP00090,CUST10826,2026-04-09 07:00:00,email,Customer asked for clarification about roaming charges after traveling to Pekanbaru. Provided rate card information.,0
+CMP00108,CUST10059,2026-04-09 13:00:00,live_chat,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00106,CUST10828,2026-04-09 15:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00228,CUST10314,2026-04-09 23:00:00,live_chat,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00262,CUST10671,2026-04-10 00:00:00,app_ticket,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00120,CUST10579,2026-04-10 18:00:00,live_chat,Customer reported slow internet connection in Palembang area during evening hours. Ticket escalated to network team.,0
+CMP00192,CUST10132,2026-04-11 15:00:00,email,Customer asked for clarification about roaming charges after traveling to Palembang. Provided rate card information.,0
+CMP00215,CUST10136,2026-04-11 21:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00011,CUST11066,2026-04-12 17:00:00,app_ticket,Customer reported slow internet connection in Jakarta area during evening hours. Ticket escalated to network team.,0
+CMP00133,CUST11043,2026-04-12 17:00:00,app_ticket,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00128,CUST10421,2026-04-12 19:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00264,CUST10031,2026-04-13 09:00:00,email,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00065,CUST10933,2026-04-13 10:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00171,CUST10669,2026-04-13 16:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00118,CUST11171,2026-04-14 09:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00050,CUST10939,2026-04-14 09:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00179,CUST10267,2026-04-14 16:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00064,CUST11070,2026-04-14 19:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00028,CUST10344,2026-04-15 07:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00216,CUST10131,2026-04-16 08:00:00,call_center,Customer reported slow internet connection in Makassar area during evening hours. Ticket escalated to network team.,0
+CMP00174,CUST10060,2026-04-16 12:00:00,email,Customer asked for clarification about roaming charges after traveling to Denpasar. Provided rate card information.,0
+CMP00169,CUST10798,2026-04-17 07:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00060,CUST10708,2026-04-17 10:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00068,CUST10424,2026-04-17 18:00:00,email,Customer reported slow internet connection in Palembang area during evening hours. Ticket escalated to network team.,0
+CMP00231,CUST10239,2026-04-18 06:00:00,email,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00258,CUST10270,2026-04-18 14:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Pekanbaru, requesting immediate investigation and account freeze.",1
+CMP00273,CUST11026,2026-04-19 07:00:00,app_ticket,"Customer claims they did not perform the SIM swap registered on their account in Malang, requesting immediate investigation and account freeze.",1
+CMP00187,CUST11124,2026-04-19 21:00:00,email,Customer asked for clarification about roaming charges after traveling to Denpasar. Provided rate card information.,0
+CMP00137,CUST11106,2026-04-20 07:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00261,CUST10465,2026-04-20 13:00:00,call_center,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00089,CUST10085,2026-04-20 14:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Jakarta. Provided rate card information.,0
+CMP00244,CUST10568,2026-04-21 06:00:00,email,"Customer claims they did not perform the SIM swap registered on their account in Yogyakarta, requesting immediate investigation and account freeze.",1
+CMP00008,CUST10469,2026-04-21 16:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00227,CUST10817,2026-04-21 18:00:00,email,"Customer claims they did not perform the SIM swap registered on their account in Jakarta, requesting immediate investigation and account freeze.",1
+CMP00218,CUST10419,2026-04-24 16:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00032,CUST10788,2026-04-25 08:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00048,CUST10331,2026-04-25 13:00:00,email,Customer reported slow internet connection in Pekanbaru area during evening hours. Ticket escalated to network team.,0
+CMP00056,CUST10619,2026-04-26 11:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00217,CUST10370,2026-04-26 19:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00191,CUST10121,2026-04-27 08:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00250,CUST11051,2026-04-27 16:00:00,call_center,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00055,CUST10279,2026-04-28 08:00:00,call_center,Customer reported slow internet connection in Jakarta area during evening hours. Ticket escalated to network team.,0
+CMP00156,CUST10404,2026-04-28 12:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00172,CUST10258,2026-04-28 17:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00024,CUST11022,2026-04-28 17:00:00,call_center,Customer reported slow internet connection in Palembang area during evening hours. Ticket escalated to network team.,0
+CMP00241,CUST11006,2026-04-29 12:00:00,email,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00009,CUST10515,2026-04-29 20:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Denpasar. Provided rate card information.,0
+CMP00253,CUST10512,2026-04-29 21:00:00,call_center,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00007,CUST10820,2026-04-30 14:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00276,CUST10102,2026-04-30 16:00:00,live_chat,"Customer disputes a large topup transaction of Rp 250,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00190,CUST10716,2026-04-30 16:00:00,email,Customer reported slow internet connection in Pekanbaru area during evening hours. Ticket escalated to network team.,0
+CMP00037,CUST10578,2026-04-30 19:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00110,CUST10159,2026-05-01 07:00:00,live_chat,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00018,CUST10583,2026-05-01 09:00:00,email,Customer asked for clarification about roaming charges after traveling to Balikpapan. Provided rate card information.,0
+CMP00135,CUST11175,2026-05-01 10:00:00,email,Customer reported slow internet connection in Medan area during evening hours. Ticket escalated to network team.,0
+CMP00078,CUST10888,2026-05-01 17:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00042,CUST10667,2026-05-01 20:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00105,CUST11016,2026-05-02 08:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00144,CUST10731,2026-05-02 17:00:00,app_ticket,Customer reported slow internet connection in Jakarta area during evening hours. Ticket escalated to network team.,0
+CMP00162,CUST10366,2026-05-02 18:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00160,CUST10947,2026-05-02 19:00:00,email,Customer asked for clarification about roaming charges after traveling to Balikpapan. Provided rate card information.,0
+CMP00235,CUST10838,2026-05-03 03:00:00,call_center,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00208,CUST10199,2026-05-03 13:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Balikpapan. Provided rate card information.,0
+CMP00091,CUST10072,2026-05-03 14:00:00,app_ticket,Customer reported slow internet connection in Balikpapan area during evening hours. Ticket escalated to network team.,0
+CMP00146,CUST11165,2026-05-03 17:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00138,CUST11180,2026-05-03 19:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00121,CUST10866,2026-05-03 21:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Medan. Provided rate card information.,0
+CMP00039,CUST10201,2026-05-04 13:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00086,CUST10317,2026-05-04 14:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00254,CUST10903,2026-05-04 17:00:00,app_ticket,"Customer claims they did not perform the SIM swap registered on their account in Yogyakarta, requesting immediate investigation and account freeze.",1
+CMP00246,CUST10908,2026-05-04 19:00:00,app_ticket,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00213,CUST10641,2026-05-05 07:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00001,CUST10984,2026-05-05 12:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00239,CUST10480,2026-05-05 14:00:00,email,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00183,CUST10057,2026-05-05 17:00:00,live_chat,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00116,CUST10594,2026-05-05 19:00:00,email,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00176,CUST10012,2026-05-05 21:00:00,call_center,Customer reported slow internet connection in Bandung area during evening hours. Ticket escalated to network team.,0
+CMP00232,CUST10135,2026-05-06 15:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Jakarta, requesting immediate investigation and account freeze.",1
+CMP00092,CUST10854,2026-05-06 21:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00047,CUST10338,2026-05-07 08:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00266,CUST11049,2026-05-08 05:00:00,app_ticket,"Customer disputes a large topup transaction of Rp 231,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00200,CUST10033,2026-05-08 12:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00034,CUST10003,2026-05-08 18:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00112,CUST10156,2026-05-09 07:00:00,email,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00129,CUST10400,2026-05-09 07:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00083,CUST10664,2026-05-09 08:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Pekanbaru. Provided rate card information.,0
+CMP00256,CUST11190,2026-05-09 09:00:00,email,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00010,CUST10312,2026-05-09 10:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00075,CUST10581,2026-05-09 10:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Makassar. Provided rate card information.,0
+CMP00152,CUST10964,2026-05-09 17:00:00,call_center,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00155,CUST10733,2026-05-09 17:00:00,email,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00245,CUST10220,2026-05-11 06:00:00,call_center,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00093,CUST10706,2026-05-11 08:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Jakarta. Provided rate card information.,0
+CMP00115,CUST10652,2026-05-11 10:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00097,CUST10305,2026-05-11 13:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Palembang. Provided rate card information.,0
+CMP00027,CUST10040,2026-05-11 14:00:00,email,Customer reported slow internet connection in Yogyakarta area during evening hours. Ticket escalated to network team.,0
+CMP00046,CUST10117,2026-05-11 15:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Pekanbaru. Provided rate card information.,0
+CMP00130,CUST10295,2026-05-11 17:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00014,CUST10782,2026-05-11 20:00:00,call_center,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00124,CUST10355,2026-05-12 07:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00084,CUST10681,2026-05-12 16:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00278,CUST10883,2026-05-12 23:00:00,live_chat,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00173,CUST10780,2026-05-13 10:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00038,CUST10498,2026-05-13 14:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00026,CUST10552,2026-05-14 13:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00157,CUST10629,2026-05-14 17:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00207,CUST11031,2026-05-14 21:00:00,call_center,Customer reported slow internet connection in Surabaya area during evening hours. Ticket escalated to network team.,0
+CMP00248,CUST10162,2026-05-15 10:00:00,live_chat,"Customer disputes a large topup transaction of Rp 238,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00189,CUST10097,2026-05-15 18:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00002,CUST10887,2026-05-15 20:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00272,CUST10683,2026-05-15 20:00:00,live_chat,"Customer claims they did not perform the SIM swap registered on their account in Balikpapan, requesting immediate investigation and account freeze.",1
+CMP00204,CUST11045,2026-05-16 15:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00088,CUST10766,2026-05-17 11:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00198,CUST10246,2026-05-17 17:00:00,email,Customer asked for clarification about roaming charges after traveling to Bandung. Provided rate card information.,0
+CMP00165,CUST10443,2026-05-18 18:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Denpasar. Provided rate card information.,0
+CMP00145,CUST10300,2026-05-18 20:00:00,live_chat,Customer reported slow internet connection in Palembang area during evening hours. Ticket escalated to network team.,0
+CMP00119,CUST10293,2026-05-19 09:00:00,call_center,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00175,CUST10207,2026-05-19 11:00:00,email,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00030,CUST10559,2026-05-19 20:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00076,CUST10966,2026-05-19 20:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00233,CUST10335,2026-05-21 01:00:00,app_ticket,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00139,CUST10893,2026-05-21 13:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00103,CUST10736,2026-05-21 14:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Yogyakarta. Provided rate card information.,0
+CMP00006,CUST10106,2026-05-21 19:00:00,call_center,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00033,CUST11074,2026-05-22 07:00:00,email,Customer reported slow internet connection in Palembang area during evening hours. Ticket escalated to network team.,0
+CMP00059,CUST10735,2026-05-22 13:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Bandung. Provided rate card information.,0
+CMP00113,CUST10946,2026-05-22 13:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00125,CUST10531,2026-05-22 15:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00077,CUST10959,2026-05-22 16:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00199,CUST10792,2026-05-22 19:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00111,CUST10488,2026-05-23 09:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00107,CUST11077,2026-05-23 13:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00041,CUST10032,2026-05-24 07:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00168,CUST10746,2026-05-24 18:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00260,CUST10110,2026-05-25 07:00:00,email,"Customer disputes a large topup transaction of Rp 171,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00265,CUST11074,2026-05-25 17:00:00,app_ticket,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00148,CUST11176,2026-05-25 18:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00220,CUST10544,2026-05-26 08:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00136,CUST11052,2026-05-26 20:00:00,email,Customer asked for clarification about roaming charges after traveling to Bandung. Provided rate card information.,0
+CMP00223,CUST11033,2026-05-27 10:00:00,call_center,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00267,CUST10476,2026-05-27 12:00:00,app_ticket,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00193,CUST10220,2026-05-27 15:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00057,CUST11167,2026-05-27 16:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Balikpapan. Provided rate card information.,0
+CMP00063,CUST11116,2026-05-27 18:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00203,CUST10540,2026-05-28 08:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Palembang. Provided rate card information.,0
+CMP00022,CUST11188,2026-05-28 12:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00134,CUST10861,2026-05-28 20:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Semarang. Provided rate card information.,0
+CMP00062,CUST10015,2026-05-28 20:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Balikpapan. Provided rate card information.,0
+CMP00236,CUST10321,2026-05-29 05:00:00,email,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00087,CUST10358,2026-05-29 07:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00240,CUST11043,2026-05-29 11:00:00,live_chat,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00066,CUST10050,2026-05-29 14:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00234,CUST10189,2026-05-29 16:00:00,call_center,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00161,CUST10234,2026-05-29 19:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00070,CUST10501,2026-05-30 08:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Malang. Provided rate card information.,0
+CMP00209,CUST10634,2026-05-30 11:00:00,call_center,Customer reported slow internet connection in Balikpapan area during evening hours. Ticket escalated to network team.,0
+CMP00132,CUST11145,2026-05-30 13:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Balikpapan. Provided rate card information.,0
+CMP00163,CUST10711,2026-05-30 17:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00251,CUST11047,2026-05-31 04:00:00,email,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00023,CUST10517,2026-05-31 11:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00071,CUST10208,2026-05-31 12:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00180,CUST10626,2026-05-31 15:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00237,CUST11146,2026-05-31 19:00:00,call_center,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00268,CUST10061,2026-06-01 07:00:00,app_ticket,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00195,CUST10217,2026-06-01 09:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Malang. Provided rate card information.,0
+CMP00211,CUST10319,2026-06-01 14:00:00,live_chat,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00243,CUST11092,2026-06-01 16:00:00,email,"Customer disputes a large topup transaction of Rp 252,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00004,CUST10235,2026-06-01 19:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Denpasar. Provided rate card information.,0
+CMP00274,CUST10741,2026-06-02 04:00:00,call_center,"Customer disputes a large topup transaction of Rp 257,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00079,CUST10996,2026-06-02 11:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Medan. Provided rate card information.,0
+CMP00242,CUST10306,2026-06-02 19:00:00,live_chat,"Customer claims they did not perform the SIM swap registered on their account in Jakarta, requesting immediate investigation and account freeze.",1
+CMP00222,CUST10683,2026-06-02 22:00:00,live_chat,Customer reports their number was used to redeem a promo bundle multiple times without their consent.,1
+CMP00159,CUST10176,2026-06-03 18:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Malang. Provided rate card information.,0
+CMP00252,CUST10133,2026-06-04 05:00:00,app_ticket,"Customer claims they did not perform the SIM swap registered on their account in Denpasar, requesting immediate investigation and account freeze.",1
+CMP00080,CUST11185,2026-06-04 16:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Medan. Provided rate card information.,0
+CMP00164,CUST11123,2026-06-04 20:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00036,CUST10794,2026-06-05 08:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00013,CUST10346,2026-06-05 18:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00131,CUST10625,2026-06-05 18:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00082,CUST10970,2026-06-06 13:00:00,call_center,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00015,CUST10567,2026-06-07 13:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00049,CUST11177,2026-06-07 14:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00194,CUST10162,2026-06-07 20:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00263,CUST10956,2026-06-07 20:00:00,email,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00122,CUST11115,2026-06-08 07:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00143,CUST10991,2026-06-08 11:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00099,CUST10335,2026-06-08 14:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00158,CUST10958,2026-06-08 17:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00224,CUST10190,2026-06-09 07:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Malang, requesting immediate investigation and account freeze.",1
+CMP00150,CUST10250,2026-06-09 11:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00045,CUST10575,2026-06-09 18:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00040,CUST10479,2026-06-11 10:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00109,CUST10620,2026-06-11 13:00:00,call_center,Customer reported slow internet connection in Surabaya area during evening hours. Ticket escalated to network team.,0
+CMP00230,CUST10664,2026-06-11 21:00:00,app_ticket,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00096,CUST10236,2026-06-11 21:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00114,CUST10564,2026-06-12 14:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00117,CUST11073,2026-06-12 17:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00051,CUST10464,2026-06-12 21:00:00,app_ticket,Customer reported slow internet connection in Balikpapan area during evening hours. Ticket escalated to network team.,0
+CMP00182,CUST10316,2026-06-14 07:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00072,CUST10023,2026-06-14 08:00:00,call_center,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00020,CUST10166,2026-06-15 11:00:00,email,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00044,CUST10292,2026-06-15 13:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00126,CUST10395,2026-06-16 07:00:00,call_center,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00127,CUST10548,2026-06-16 09:00:00,live_chat,Customer reported slow internet connection in Medan area during evening hours. Ticket escalated to network team.,0
+CMP00069,CUST10028,2026-06-16 13:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00035,CUST10554,2026-06-16 14:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Malang. Provided rate card information.,0
+CMP00102,CUST10035,2026-06-16 17:00:00,email,Customer reported slow internet connection in Semarang area during evening hours. Ticket escalated to network team.,0
+CMP00073,CUST11086,2026-06-17 11:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00067,CUST11122,2026-06-17 12:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Jakarta. Provided rate card information.,0
+CMP00188,CUST10254,2026-06-17 14:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00196,CUST10286,2026-06-17 14:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Jakarta. Provided rate card information.,0
+CMP00081,CUST10436,2026-06-17 20:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00153,CUST10427,2026-06-17 20:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Surabaya. Provided rate card information.,0
+CMP00085,CUST11164,2026-06-18 07:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00052,CUST11186,2026-06-18 07:00:00,live_chat,Customer reported slow internet connection in Pekanbaru area during evening hours. Ticket escalated to network team.,0
+CMP00094,CUST10824,2026-06-18 08:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00271,CUST11197,2026-06-18 11:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Malang, requesting immediate investigation and account freeze.",1
+CMP00012,CUST10034,2026-06-18 21:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Medan. Provided rate card information.,0
+CMP00184,CUST10334,2026-06-19 09:00:00,live_chat,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00005,CUST10596,2026-06-19 12:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Yogyakarta. Provided rate card information.,0
+CMP00219,CUST10086,2026-06-19 19:00:00,live_chat,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00017,CUST10688,2026-06-19 19:00:00,call_center,Customer reported slow internet connection in Yogyakarta area during evening hours. Ticket escalated to network team.,0
+CMP00043,CUST10687,2026-06-20 11:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Palembang. Provided rate card information.,0
+CMP00269,CUST10910,2026-06-20 12:00:00,live_chat,"Customer claims they did not perform the SIM swap registered on their account in Medan, requesting immediate investigation and account freeze.",1
+CMP00210,CUST10890,2026-06-20 13:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00003,CUST10011,2026-06-21 07:00:00,call_center,Customer reported slow internet connection in Makassar area during evening hours. Ticket escalated to network team.,0
+CMP00214,CUST10968,2026-06-21 08:00:00,app_ticket,Customer asked for clarification about roaming charges after traveling to Palembang. Provided rate card information.,0
+CMP00280,CUST10770,2026-06-21 16:00:00,email,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00226,CUST10283,2026-06-21 16:00:00,email,Multiple failed login attempts detected on customer account followed by a password reset request from an unrecognized device.,1
+CMP00061,CUST10795,2026-06-22 10:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00225,CUST11083,2026-06-23 00:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Pekanbaru, requesting immediate investigation and account freeze.",1
+CMP00238,CUST10228,2026-06-23 03:00:00,app_ticket,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00053,CUST10905,2026-06-23 18:00:00,live_chat,Customer asked for clarification about roaming charges after traveling to Yogyakarta. Provided rate card information.,0
+CMP00221,CUST10636,2026-06-24 13:00:00,call_center,"Customer disputes a large topup transaction of Rp 166,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00270,CUST10068,2026-06-24 15:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Bandung, requesting immediate investigation and account freeze.",1
+CMP00170,CUST10449,2026-06-24 17:00:00,call_center,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00149,CUST10742,2026-06-24 19:00:00,live_chat,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00074,CUST11147,2026-06-25 07:00:00,email,Customer reported slow internet connection in Malang area during evening hours. Ticket escalated to network team.,0
+CMP00140,CUST10445,2026-06-25 09:00:00,email,Customer asked for clarification about roaming charges after traveling to Jakarta. Provided rate card information.,0
+CMP00206,CUST10604,2026-06-25 09:00:00,app_ticket,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00166,CUST11184,2026-06-25 11:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00201,CUST10045,2026-06-25 12:00:00,app_ticket,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00167,CUST10482,2026-06-25 21:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00151,CUST10431,2026-06-26 09:00:00,email,"Customer complained about SMS notification not arriving after topup. Verified balance is correct, notification delay only.",0
+CMP00031,CUST10753,2026-06-26 20:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00098,CUST10865,2026-06-26 21:00:00,email,Customer called asking why their monthly bill increased compared to last month. Explained new tariff plan.,0
+CMP00257,CUST10978,2026-06-27 14:00:00,call_center,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1
+CMP00277,CUST10273,2026-06-27 18:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Palembang, requesting immediate investigation and account freeze.",1
+CMP00255,CUST10342,2026-06-28 02:00:00,call_center,"Customer claims they did not perform the SIM swap registered on their account in Surabaya, requesting immediate investigation and account freeze.",1
+CMP00177,CUST10444,2026-06-28 12:00:00,call_center,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00104,CUST10863,2026-06-28 19:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00275,CUST10907,2026-06-29 02:00:00,live_chat,"Customer disputes a large topup transaction of Rp 238,000 they claim they never made, requesting refund and fraud investigation.",1
+CMP00147,CUST10816,2026-06-29 21:00:00,email,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00186,CUST10071,2026-06-30 12:00:00,app_ticket,Customer requested to change their bundling package from Basic to Family Plan. Request processed successfully.,0
+CMP00154,CUST10954,2026-06-30 15:00:00,call_center,Customer asked for clarification about roaming charges after traveling to Yogyakarta. Provided rate card information.,0
+CMP00249,CUST10411,2026-06-30 19:00:00,app_ticket,Account flagged: same payment instrument used across several different customer accounts within a short time window.,1

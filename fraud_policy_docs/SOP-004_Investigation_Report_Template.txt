@@ -1,0 +1,12 @@
+INVESTIGATION REPORT TEMPLATE — SOP-004
+Title: Standard Fraud Investigation Report Format
+
+Every case escalated by the Investigator Agent must produce a report containing:
+  1. Case ID and date opened.
+  2. Customer ID(s) involved.
+  3. Fraud category (SIM Swap / Topup Fraud / Promo Abuse).
+  4. Summary of triggering evidence (which risk indicators were met, referencing the
+     relevant SOP document).
+  5. Risk level (LOW / MEDIUM / HIGH).
+  6. Recommended action (Auto-Approve / Escalate to Human Reviewer / Block).
+  7. Supporting data references (transaction IDs, event IDs, complaint IDs).

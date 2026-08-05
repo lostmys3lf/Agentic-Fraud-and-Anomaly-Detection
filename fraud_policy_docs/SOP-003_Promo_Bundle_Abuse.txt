@@ -1,0 +1,23 @@
+FRAUD POLICY DOCUMENT — SOP-003
+Title: Subscription and Promo Bundle Abuse Policy
+
+1. Purpose
+This document defines the criteria for identifying customers who exploit promotional
+bundle offers through repeated cancel-and-recreate account behavior.
+
+2. Risk Indicators
+  - A customer redeems the same or similar promo bundle more than 3 times within a
+    90-day period.
+  - Promo redemptions are followed by cancellation and re-subscription within 7 days.
+  - No corresponding regular usage (voice, data, SMS) is recorded between redemptions.
+
+3. Escalation Levels
+  - LOW RISK: 1–2 redemptions in 90 days. No action.
+  - MEDIUM RISK: 3 redemptions in 90 days. Flag account, reduce promo eligibility.
+  - HIGH RISK: 4+ redemptions in 90 days with cancel-recreate pattern. Block promo
+    eligibility for 180 days and open an investigation case.
+
+4. Required Actions for HIGH RISK Cases
+  - Revoke promo eligibility for the account.
+  - Reverse any promo credit granted in the current cycle if terms were violated.
+  - Generate an investigation report and notify the Retention team.

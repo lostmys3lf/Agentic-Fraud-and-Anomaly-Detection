@@ -1,0 +1,27 @@
+FRAUD POLICY DOCUMENT — SOP-001
+Title: SIM Swap Verification and Escalation Procedure
+
+1. Purpose
+This document defines the standard procedure for validating SIM swap requests and
+identifying potentially fraudulent SIM swap activity.
+
+2. Risk Indicators
+A SIM swap event should be flagged as HIGH RISK when two or more of the following
+conditions are met:
+  - The swap location is more than 100 km from the customer's registered home city.
+  - The stated reason is "lost_phone" but the device used for the swap has not been
+    previously registered to the customer.
+  - A password reset or financial account login occurs within 2 hours of the swap.
+  - The customer has had more than 2 device changes in the last 12 months.
+
+3. Escalation Levels
+  - LOW RISK (0 indicators): Auto-approve, no further action.
+  - MEDIUM RISK (1 indicator): Send verification SMS/email, hold for 1 hour.
+  - HIGH RISK (2+ indicators): Auto-block pending manual verification call to customer
+    using the registered emergency contact number. Case must be escalated to the Fraud
+    Investigation Team within 30 minutes.
+
+4. Required Actions for HIGH RISK Cases
+  - Freeze outbound transactions on the account.
+  - Notify the customer via an alternate verified channel.
+  - Generate an investigation report referencing this SOP.

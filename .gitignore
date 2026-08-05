@@ -1,0 +1,31 @@
+# Environment
+.env
+.env.*
+.venv/
+
+# Personal reference material, not part of the case study deliverable
+/docs/
+
+# Source-of-truth doc kept local only (per user request)
+/CLAUDE.md
+
+# Notebooks kept local only (per user request)
+/notebooks/
+
+# All notebook/pipeline artifacts: MLflow db + artifacts, Chroma index, model pickles
+/outputs/
+
+# Python bytecode/cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Test cache (tests/ added later per CLAUDE.md)
+.pytest_cache/
+
+# OS cruft
+.DS_Store
+Thumbs.db

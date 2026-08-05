@@ -1,0 +1,16 @@
+pandas==2.0.3
+numpy==1.26.4
+matplotlib==3.10.8
+seaborn==0.13.2
+ipykernel==7.2.0
+scikit-learn==1.3.2
+shap==0.44.1
+mlflow==3.14.0
+
+# L2 Investigation (RAG over fraud_policy_docs). Both pins are deliberate:
+# chromadb 1.x uses a Rust core that segfaults on Windows once pandas/scikit-learn have
+# loaded their bundled msvcp140.dll (14.29/14.32, older than that core needs); 0.6.3 uses
+# hnswlib and is import-order independent. onnxruntime >=1.21 fails the same way at DLL
+# load. Neither problem exists on Colab/Linux -- the pins just keep local runs identical.
+chromadb==0.6.3
+onnxruntime==1.20.1

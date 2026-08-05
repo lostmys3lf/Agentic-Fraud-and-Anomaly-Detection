@@ -1,0 +1,25 @@
+FRAUD POLICY DOCUMENT — SOP-002
+Title: Topup and Voucher Transaction Fraud Detection
+
+1. Purpose
+This document defines risk thresholds for identifying fraudulent topup and voucher
+redemption patterns, commonly associated with reseller fraud rings or stolen payment
+instruments.
+
+2. Risk Indicators
+  - The same payment instrument (e-wallet ID, card number, or device fingerprint) is
+    used across 3 or more distinct customer accounts within a 24-hour window.
+  - Transactions occur between 01:00 and 05:00 local time in unusually high volume.
+  - Transaction amounts cluster near round numbers (e.g., 200,000 / 250,000 / 300,000)
+    across many accounts in a short burst.
+
+3. Escalation Levels
+  - LOW RISK: No shared instrument detected, normal transaction timing. No action.
+  - MEDIUM RISK: Shared instrument found across 2 accounts. Flag for monitoring.
+  - HIGH RISK: Shared instrument or device fingerprint found across 3+ accounts within
+    24 hours. Suspend the payment instrument and open an investigation case.
+
+4. Required Actions for HIGH RISK Cases
+  - Temporarily suspend the shared payment instrument network-wide.
+  - Cross-check all linked accounts for other suspicious activity (SIM swaps, promo abuse).
+  - Generate a consolidated investigation report covering all linked accounts.
