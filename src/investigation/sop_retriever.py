@@ -30,11 +30,14 @@ Neither problem exists on Colab/Linux.
 from dataclasses import dataclass
 
 import chromadb
+from importlib_metadata import metadata
 
 import config
 import os
 import re
 from chromadb.utils import embedding_functions
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 @dataclass(frozen=True)
 class SopDocument:
@@ -117,7 +120,7 @@ class SopEmbedder:
 
         return clean
 
-def load_sop_documents(policy_dir: str = config.POLICY_DOCS_DIR) -> list[SopDocument]:
+def load_sop_documents(policy_dir: str = config.POLICY_DOCS_DIR) -> list[SopDocument]: #  read the 4 SOP .txt files, split header from body.
     sop_docs = []
     for name in sorted(os.listdir(policy_dir)):
         if not name.endswith('.txt'):
@@ -144,7 +147,8 @@ def load_sop_documents(policy_dir: str = config.POLICY_DOCS_DIR) -> list[SopDocu
     return sop_docs
 
 
-def chunk_documents(documents: list[SopDocument]) -> list[SopChunk]:
+def chunk_documents(documents: list[SopDocument]) -> list[SopChunk]: #  one chunk per numbered SOP section, each carrying enough
+                                                                    #metadata to be cited as "SOP-001 §2 (Risk Indicators)".
     all_chunks = []
     for doc in documents:
         chunks = []
@@ -278,7 +282,35 @@ def retrieve_vector(
 
     Hint: `collection.query(query_texts=[...], n_results=..., where={...})`, `enumerate(..., start=1)`
     """
-    raise NotImplementedError
+    where = None
+    if doc_id is not None: where = {'doc_id': doc_id}
+    results = collection.query(
+        query_texts=[query], n_results=top_k,
+        where = where   
+        )
+
+    ids = results['ids'][0]
+    documents = results['documents'][0]
+    metadatas = results['metadatas'][0]
+    distances = results['distances'][0]
+    
+    hasil = []
+    for i in range(len(ids)):
+        chunk = SopChunk(
+            chunk_id=ids[i],
+            doc_id=metadatas[i]['doc_id'],
+            doc_title=metadatas[i]['doc_title'],
+            section_no=metadatas[i]['section_no'],
+            section_title=metadatas[i]['section_title'],
+            text=documents[i],
+        )
+        hasil.append(RetrievedChunk(
+            chunk=chunk,
+            score= 1 - distances[i],        # dari distances[i], dibalik
+            rank=i + 1,       # i mulai 0, peringkat mulai 1
+        ))
+    return hasil
+ 
 
 
 def retrieve_keyword(
@@ -303,4 +335,23 @@ def retrieve_keyword(
     Hint: `TfidfVectorizer(stop_words='english')`, `fit_transform()`, `transform()`,
           `cosine_similarity()`, `argsort()`
     """
-    raise NotImplementedError
+
+    vectorizer = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = vectorizer.fit_transform([c.text for c in chunks])
+    tfidf_query = vectorizer.transform([query])
+    similarities = cosine_similarity(tfidf_query, tfidf_matrix).flatten()
+
+    ranked_indices = []
+    for i in range(len(similarities)):
+        if similarities[i] > 0:  # Only consider non-zero similarities
+            ranked_indices.append(i)
+    ranked_indices = sorted(ranked_indices, key=lambda x: similarities[x], reverse=True)[:top_k]
+    result = []
+    for r,j in enumerate(ranked_indices, start=1):
+        result.append(RetrievedChunk(
+            chunk=chunks[j],
+            score=similarities[j],
+            rank=r
+        ))
+    return result
+  

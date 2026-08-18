@@ -29,23 +29,49 @@ def find_shared_device_accounts(
     device_id: str,
     window_hours: int = config.SHARED_DEVICE_WINDOW_HOURS,
 ) -> pd.DataFrame:
-    """
-    SOP-002 section 2: how many distinct accounts used this device inside one window?
+ 
+    df = transactions[transactions["device_id"] == device_id].copy()
 
-    TODO:
-      1. Keep only rows for this device_id.
-      2. For each transaction, count distinct customer_id within window_hours of it
-         (the SOP says "within a 24-hour window", not "in the whole dataset" -- a device
-         seen on 3 accounts across 3 months is not the same finding).
-      3. Return one row per account with its transaction count and first/last timestamp,
-         sorted so the busiest account is on top.
-      4. The caller compares the account count against config.SHARED_DEVICE_ACCOUNTS_
-         MEDIUM / _HIGH -- do not hardcode 2 or 3 in here.
+    # Device yang nggak pernah dipakai bukan error, cuma nggak ada temuan.
+    # Bentuk kolomnya tetap lengkap supaya pemanggil nggak perlu pengecekan tambahan.
+    if df.empty:
+        return pd.DataFrame(
+            columns=[
+                "customer_id",
+                "n_transactions",
+                "first_seen",
+                "last_seen",
+                "max_accounts_in_window",
+            ]
+        )
 
-    Hint: `df[df[col] == value]`, `pd.Timedelta(hours=...)`, `sort_values()`,
-          `groupby().agg()`, `nunique()`
-    """
-    raise NotImplementedError
+    # read_csv ngasih timestamp sebagai teks. Dibandingin sebagai teks,
+    # '2026-05-10' < '2026-05-9' -- benar secara abjad, salah secara waktu.
+    df["timestamp"] = pd.to_datetime(df["timestamp"])
+
+    # Tiap transaksi jadi titik awal jendelanya sendiri. SOP-002 ngitung "dalam 24 jam",
+    # bukan "sepanjang data": 25 akun selama 3 bulan itu warnet, 25 akun dalam semalam
+    # itu temuan lain.
+    accounts_per_window = []
+    for start in df["timestamp"]:
+        end = start + pd.Timedelta(hours=window_hours)
+        window = df[(df["timestamp"] >= start) & (df["timestamp"] < end)]
+        accounts_per_window.append(window["customer_id"].nunique())
+    max_accounts = max(accounts_per_window)
+
+    # Angka puncak di atas dipakai L3 buat mutusin; tabel per akun ini yang dikutip L4.
+    per_account = (
+        df.groupby("customer_id")
+        .agg(
+            n_transactions=("transaction_id", "count"),
+            first_seen=("timestamp", "min"),
+            last_seen=("timestamp", "max"),
+        )
+        .reset_index()
+    )
+    per_account["max_accounts_in_window"] = max_accounts
+
+    return per_account.sort_values("n_transactions", ascending=False).reset_index(drop=True)
 
 
 def count_promo_redemptions(
@@ -53,41 +79,48 @@ def count_promo_redemptions(
     customer_id: str,
     window_days: int = config.PROMO_WINDOW_DAYS,
 ) -> int:
-    """
-    SOP-003 section 2: promo bundle redemptions by this customer in the last window_days.
+ 
+    df = transactions[
+        (transactions["customer_id"] == customer_id)
+        & (transactions["transaction_type"] == "promo_bundle_redeem")
+    ].copy()
 
-    Careful -- promo_bundle_redeem is the leaked column from CLAUDE.md: every such row is
-    label 1. That makes it useless as an L1 model feature, but it is still the correct
-    thing to count here, because SOP-003 literally counts redemptions. Different jobs.
-    Note the distinction in the notebook rather than reusing the L1 feature function.
+    if df.empty:
+        return 0
 
-    TODO:
-      1. Filter to this customer and transaction_type == 'promo_bundle_redeem'.
-      2. Keep rows inside the window (the dataset spans 90 days total, so with the
-         default window this is every row -- state that, do not pretend it is a filter).
-      3. Return the count as a plain int.
+    df["timestamp"] = pd.to_datetime(df["timestamp"])
 
-    Hint: `str.eq()`, `&`, `df.loc[]`, `len()` or `shape[0]`
-    """
-    raise NotImplementedError
+    # Data sintetis nggak punya "hari ini". Acuannya penebusan terakhir nasabah ini
+    # sendiri, jadi jendelanya selalu berakhir di aktivitas terakhir dia -- bukan di
+    # tanggal kalender yang sama buat semua orang. Datanya cuma 90 hari, jadi dengan
+    # PROMO_WINDOW_DAYS=90 saringan ini nggak buang baris apa pun (8 -> 8 pada
+    # CUST10061). Kodenya bener, datanya yang bikin langkah ini nggak berefek.
+    cutoff = df["timestamp"].max() - pd.Timedelta(days=window_days)
+
+    # int() supaya hasilnya bisa masuk json.dumps di laporan L4 -- numpy.int64 nggak bisa.
+    return int(len(df[df["timestamp"] >= cutoff]))
 
 
 def get_customer_complaints(
     complaint_notes: pd.DataFrame,
     customer_id: str,
 ) -> pd.DataFrame:
-    """
-    Complaints filed by this customer -- supporting evidence for the SOP-004 report.
+  
+    df = complaint_notes[complaint_notes["customer_id"] == customer_id].copy()
 
-    TODO:
-      1. Filter to this customer, sort by timestamp.
-      2. Return complaint_id, timestamp, channel, complaint_text, related_to_fraud_case.
-      3. Do not aggregate the text or compute a sentiment -- 47 templates cannot support
-         that. The complaint_id list is what the report cites.
+    # Diurutin sebagai waktu, bukan teks. Di data ini formatnya ISO jadi urutan abjad
+    # kebetulan sama, tapi itu sifat formatnya -- bukan sesuatu yang boleh diandalkan.
+    df["timestamp"] = pd.to_datetime(df["timestamp"])
 
-    Hint: `df[df[col] == value]`, `sort_values()`, column selection with a list
-    """
-    raise NotImplementedError
+    return df.sort_values("timestamp")[
+        [
+            "complaint_id",
+            "timestamp",
+            "channel",
+            "complaint_text",
+            "related_to_fraud_case",
+        ]
+    ].reset_index(drop=True)
 
 
 def build_customer_profile(
@@ -97,30 +130,68 @@ def build_customer_profile(
     sim_swap_events: pd.DataFrame,
     complaint_notes: pd.DataFrame,
 ) -> dict:
-    """
-    Bundle every L2 finding for one customer into the evidence dict L3 consumes.
+  
+    row = customers[customers["customer_id"] == customer_id]
 
-    This is the contract between L2 and L3, so decide the keys here and keep them
-    stable. Suggested shape -- each value is either a number L3 compares to a config
-    threshold, or a list of ids the L4 report cites:
+    # Beda sama count_promo_redemptions yang balikin 0 buat id nggak dikenal. Di sana 0
+    # itu jawaban sah ("nol penebusan"); di sini profil kosong bukan jawaban, itu tanda
+    # pemanggilnya salah. Kalau dibiarin lolos, L3 nerima profil serba nol dan mutusin
+    # Auto-Approve dengan tenang.
+    if row.empty:
+        raise KeyError(f"unknown customer_id: {customer_id}")
+    row = row.iloc[0]
 
-        {
-          "customer_id": ...,
-          "home_city": ..., "tenure_months": ..., "device_changes_last_12mo": ...,
-          "n_transactions": ..., "n_night_transactions": ...,
-          "promo_redemptions_90d": ...,
-          "shared_device_ids": [...], "max_accounts_per_shared_device": ...,
-          "n_sim_swaps": ..., "max_swap_distance_km": ...,
-          "complaint_ids": [...], "transaction_ids": [...], "swap_event_ids": [...],
-        }
+    df = transactions[transactions["customer_id"] == customer_id].copy()
+    df["timestamp"] = pd.to_datetime(df["timestamp"])
 
-    TODO:
-      1. Pull the customer row from `customers` (raises if the id is unknown -- fail
-         loudly, a silent empty profile would become a silently wrong decision).
-      2. Call the three functions above, plus this customer's SIM swap events.
-      3. Return the dict. No risk level and no action here -- scoring is L3's job
-         (src/decision/), and mixing them makes the decision untraceable.
+    hour = df["timestamp"].dt.hour
+    night = df[(hour >= config.NIGHT_HOUR_START) & (hour < config.NIGHT_HOUR_END)]
 
-    Hint: `df.loc[df[col] == value]`, `.iloc[0]`, `.to_dict()`, `tolist()`
-    """
-    raise NotImplementedError
+    # Satu nasabah bisa pakai beberapa device, dan find_shared_device_accounts cuma
+    # nerima satu -- itu yang bikin loop ini perlu. Angkanya diambil dari fungsi itu,
+    # bukan dihitung ulang, supaya definisi "dalam 24 jam" cuma hidup di satu tempat.
+    shared_device_ids = []
+    accounts_per_device = []
+    for device_id in df["device_id"].unique():
+        shared = find_shared_device_accounts(transactions, device_id)
+        n_accounts = int(shared["max_accounts_in_window"].iloc[0])
+        if n_accounts > 1:  # dipakai satu akun doang bukan temuan
+            shared_device_ids.append(device_id)
+            accounts_per_device.append(n_accounts)
+
+    swaps = sim_swap_events[sim_swap_events["customer_id"] == customer_id]
+    complaints = get_customer_complaints(complaint_notes, customer_id)
+
+    # Semua angka dibungkus int()/float() dan semua daftar pakai .tolist(): tipe bawaan
+    # pandas (numpy.int64, numpy array) nggak bisa masuk json.dumps di laporan L4.
+    return {
+        "customer_id": customer_id,
+        "home_city": row["home_city"],
+        "tenure_months": int(row["tenure_months"]),
+        "device_changes_last_12mo": int(row["device_changes_last_12mo"]),
+        "n_transactions": len(df),
+        "n_night_transactions": len(night),
+        "promo_redemptions_90d": count_promo_redemptions(transactions, customer_id),
+        "shared_device_ids": shared_device_ids,
+        "max_accounts_per_shared_device": max(accounts_per_device, default=0),
+        "n_sim_swaps": len(swaps),
+        # Nasabah tanpa swap wajar, bukan error -- .max() atas kolom kosong itu NaN,
+        # dan NaN di JSON jadi literal `NaN` yang bukan JSON sah.
+        "max_swap_distance_km": (
+            float(swaps["distance_from_home_km"].max()) if not swaps.empty else 0.0
+        ),
+        # Dua key di bawah dipakai indikator 2 dan 3 SOP-001 (L3 evaluate_sim_swap).
+        "swap_reasons_stated": swaps["reason_stated"].tolist(),
+        # Sengaja None, bukan 0.0 -- beda dari max_swap_distance_km di atas. Jarak 0 km itu
+        # kasus paling aman (nasabah di rumah), tapi 0 jam artinya "login baru diganti
+        # beberapa detik lalu", yaitu kasus paling PARAH. Nasabah tanpa swap bakal ketuduh
+        # indikator yang nggak pernah kejadian. None = "nggak ada nilainya", dan
+        # evaluate_sim_swap() keluar duluan buat nasabah tanpa swap jadi nilai ini nggak
+        # pernah dibandingin. None juga jadi null yang sah di JSON, beda dari float('inf').
+        "min_hours_since_login_change": (
+            float(swaps["hours_since_last_login_change"].min()) if not swaps.empty else None
+        ),
+        "complaint_ids": complaints["complaint_id"].tolist(),
+        "transaction_ids": df["transaction_id"].tolist(),
+        "swap_event_ids": swaps["event_id"].tolist(),
+    }

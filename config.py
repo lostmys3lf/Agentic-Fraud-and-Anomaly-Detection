@@ -63,6 +63,51 @@ RAG_TOP_K = 3
 # It has to be tuned against real queries in notebook 03 before anything relies on it.
 RAG_MIN_SIMILARITY = 0.20
 
+# --- L3 Decision: bands for the L1 confidence score ---
+# NOT SOP numbers, and NOT two points on one scale. LOW and HIGH answer different
+# questions, so they get tuned against different metrics:
+#
+#   LOW   "below this we are willing to Auto-Approve" -- a recall guarantee. Pick it from
+#         the operating point where nothing fraudulent in the test window scored beneath
+#         it. Setting it too high closes a real case with nobody looking.
+#   HIGH  "above this a human should look" -- a precision budget, sized by how many cases
+#         a reviewer can actually work through. In the option-C matrix an L1 HIGH never
+#         blocks anything on its own (Block always needs an L2 HIGH carrying a cited SOP
+#         clause), so this is an Escalate-grade cut -- not the near-perfect precision you
+#         would demand before auto-blocking an account.
+#
+# One pair per model, not one pair for the repo. A probability threshold describes one
+# model's calibration, not a policy: 0.70 from the transaction RandomForest says nothing
+# about a swap model trained at a different grain with a different base rate (2.69% vs
+# 10.0%). Same reason MLFLOW_EXPERIMENT_* is split further down -- if the runs must not be
+# mixed, the thresholds cannot be either.
+#
+# PROVISIONAL, and the only guessed numbers left in this file: replace them with the
+# operating point read off the June split in notebook 02 (the tuned RandomForest sits at
+# precision 0.262 / recall 1.00, PR-AUC 0.788) and write the (precision, recall) pair you
+# picked next to each one. Note the leak while doing it -- promo rows are trivially
+# separable, so a threshold tuned on this data is partly tuned on the generator.
+L1_TX_SCORE_LOW = 0.30
+L1_TX_SCORE_HIGH = 0.70
+
+# No SIM-swap model exists yet -- notebook 02 Bagian 2 is still an unrun template. None on
+# purpose: score_band() has to fail loudly rather than quietly read a swap score against
+# the transaction model's calibration.
+L1_SWAP_SCORE_LOW = None
+L1_SWAP_SCORE_HIGH = None
+
+# Which pair a score gets read against. The key is the model that produced the score, so
+# the caller has to say where its number came from -- see decide(..., l1_source=...).
+L1_SCORE_BANDS = {
+    "transaction": (L1_TX_SCORE_LOW, L1_TX_SCORE_HIGH),
+    "sim_swap": (L1_SWAP_SCORE_LOW, L1_SWAP_SCORE_HIGH),
+}
+
+# --- L4 Reporting: SOP-004 case files ---
+# One folder per run of the reporting layer, under outputs/ so .gitignore already covers
+# it. Case files are generated artifacts, never edited by hand -- regenerate instead.
+CASE_FILE_DIR = os.path.join(OUTPUT_DIR, "case_files")
+
 # --- MLflow experiment tracking (L1) ---
 # SQLite backend, not the older file-based one: MLflow 3.x put the filesystem tracking
 # store in maintenance mode (it raises unless MLFLOW_ALLOW_FILE_STORE=true), and the

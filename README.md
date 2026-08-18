@@ -43,21 +43,24 @@ src/
   investigation/                L2 RAG retriever + pattern lookup
   decision/                     L3 policy thresholds -> decision
   reporting/                    L4 SOP-004 case file builder
-notebooks/
-  01_data_understanding.ipynb
-  02_detection_baseline_and_model.ipynb
-  03_agent_pipeline_end_to_end.ipynb
+notebooks/                     named NN_<layer>_<topic>
+  01_L1_data_understanding.ipynb
+  02_L1_detection_baseline_and_model.ipynb
+  03_L2_sop_retriever_rag.ipynb
+  04_L2_pattern_lookup.ipynb
 outputs/                       notebook artifacts (gitignored)
 ```
 
 ## Status
 
-- **L1 (Detection)** — baseline + model logic prototyped in `02_detection_baseline_and_model.ipynb`
+- **L1 (Detection)** — baseline + model logic prototyped in `02_L1_detection_baseline_and_model.ipynb`
   for the transaction fraud task (time-based split, Random Forest, MLflow-tracked). SIM-swap
   section and migration into `src/` still pending.
-- **L2 (Investigation)** — `src/investigation/` scaffolded; RAG pipeline (Chroma + embeddings)
-  design proven in a prior session, being re-derived step by step in
-  `03_agent_pipeline_end_to_end.ipynb`.
+- **L2 (Investigation)** — both halves implemented and verified. `sop_retriever.py`: SOP corpus
+  → 13 section chunks → Chroma index → vector retrieval with SOP citations, plus a TF-IDF
+  baseline it is measured against; derived in `03_L2_sop_retriever_rag.ipynb`.
+  `pattern_lookup.py`: shared-device windows, promo redemption counts, complaint lookup, and
+  the customer evidence dict L3 consumes; derived in `04_L2_pattern_lookup.ipynb`.
 - **L3 (Decision) / L4 (Reporting)** — not yet built.
 
 ## Setup
