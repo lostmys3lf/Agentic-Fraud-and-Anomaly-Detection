@@ -1,18 +1,63 @@
-# Agentic Fraud & Anomaly Detection
+# Agentic Fraud & Anomaly Investigation
 
-Case study: agentic fraud and anomaly investigation for a telco, built on a **synthetic**
-labeled dataset. Personal learning / DS-AI mentoring project — not production software.
+An end-to-end **agentic investigation pipeline** for telco fraud: it takes one customer from an
+ML risk score, through policy retrieval and evidence lookup, to a deterministic decision and an
+auditable case file — orchestrated with LangGraph and served as a Streamlit decision dashboard.
+
+Built on a **synthetic** labeled dataset. Personal learning / DS-AI mentoring project, not
+production software.
+
+![Dashboard overview](assets/dashboard_overview.png)
 
 ## Flow
 
-`Detect -> Investigate -> Decide -> Report`
+```mermaid
+flowchart LR
+    A[customer_id] --> L1
 
-- **L1 Detection** — ML / anomaly scoring producing a confidence score.
-- **L2 Investigation** — RAG over `fraud_policy_docs/` (SOP-001 to SOP-004) plus historical pattern lookup.
+    subgraph L1["L1 · Detect"]
+        direction TB
+        L1a["Random Forest<br/>transaction scorer"]
+        L1b["SOP-001 rule<br/>SIM-swap indicators"]
+    end
+
+    subgraph L2["L2 · Investigate"]
+        direction TB
+        L2a["RAG over SOP corpus<br/>Chroma + MiniLM"]
+        L2b["Pattern lookup<br/>shared device / promo / complaints"]
+    end
+
+    subgraph L3["L3 · Decide"]
+        L3a["L1 band x L2 risk matrix<br/>deterministic, no LLM"]
+    end
+
+    subgraph L4["L4 · Report"]
+        L4a["SOP-004 case file<br/>+ LLM narrative (prose only)"]
+    end
+
+    L1 --> L2 --> L3 --> L4 --> R["Auto-Approve / Escalate / Block<br/>.json + .md case file"]
+    L1 -. unknown customer .-> E[handle_error]
+```
+
+- **L1 Detection** — ML / rule scoring producing a confidence score per customer.
+- **L2 Investigation** — RAG over `fraud_policy_docs/` (SOP-001..004) plus historical pattern lookup.
 - **L3 Decision** — weighs L1 + L2 findings against policy thresholds, emits Auto-Approve / Escalate / Block.
 - **L4 Reporting** — compiles a structured, auditable case file in SOP-004 format.
 
-Fraud types in scope: reseller rings, SIM-swap account takeover, promo abuse.
+Fraud types in scope: shared-device topup rings, SIM-swap account takeover, promo abuse.
+
+## Design decisions worth knowing
+
+1. **The LLM never decides.** Risk level and recommended action are resolved by a deterministic
+   `L1 band x L2 risk` matrix. The LLM writes one `narrative_summary` field, outside the seven
+   SOP-004 fields, and `attach_narrative()` asserts it changed neither.
+2. **Every finding cites its SOP clause.** Retrieval is scoped by `doc_id` to the document the L1
+   category implies, so a citation always points at the right SOP — see the honesty note below for
+   what that does *not* buy.
+3. **One customer = one case file.** The decision layer runs per customer profile, so any other
+   grain would mean reopening L3.
+4. **L4 recomputes nothing.** Risk level and action are copied verbatim from the decision object;
+   an `if` in the reporting layer that changes either one is a bug, and the test suite checks it.
 
 ## Data
 
@@ -27,45 +72,88 @@ across 1,200 customers.
 | `sim_swap_events.csv` | 200 | `is_fraud_label`, 10.0% positive |
 | `complaint_notes.csv` | 280 | `related_to_fraud_case` (proxy only), 21.4% positive |
 
-Known data gaps (no case-level label, no `case_id`, several SOP indicators not directly
-computable) and a documented label-leakage pattern are tracked in `CLAUDE.md`.
+## Results
+
+All numbers below were measured by running this repo. Splits are **time-based**
+(train 2026-04-01..05-31, test 2026-06-01..06-30), never random.
+
+**L1 — detection**
+
+| task | model | precision | recall | F1 | PR-AUC |
+|---|---|---|---|---|---|
+| transaction fraud | Random Forest (tuned) | 0.262 | 1.000 | 0.415 | 0.788 |
+| SIM swap | SOP-001 rule, 2+ indicators | 0.952 | 1.000 | 0.976 | — |
+| SIM swap | Logistic Regression | 0.333 | 0.727 | 0.457 | 0.331 |
+
+The SIM-swap rule beats the model it was benchmarked against — the baseline stayed.
+
+**L2 — retrieval, dense vs. sparse** (13-question eval set over the 4-SOP corpus)
+
+| retriever | recall@1 | recall@3 |
+|---|---|---|
+| Chroma + all-MiniLM-L6-v2 | 9/13 | 13/13 |
+| TF-IDF baseline | 8/13 | 10/13 |
+
+**L3/L4 — decision and reporting** (59-customer batch at live model scores)
+
+| check | result |
+|---|---|
+| action split | Block 39 / Auto-Approve 16 / Escalate 4 |
+| findings without an SOP citation | 0 of 124 |
+| L4 rows where risk level or action drifted from L3 | 0 of 119 |
+
+**Orchestration — is the framework earning its place?**
+
+| | LangGraph | plain sequential calls |
+|---|---|---|
+| lines to wire | 17 | 9 |
+| per customer | ~123 ms | ~128 ms |
+
+On this fixed four-step flow LangGraph is cost-neutral and eight lines longer. It stays in
+because the conditional-edge and state-trace machinery is the point of the exercise — but the
+comparison is reported, not hidden.
+
+## Honest limitations
+
+These are findings, not disclaimers — a portfolio project that hides them is the failure mode.
+
+- **The dataset leaks.** Every promo redemption row carries label 1, every fraudulent topup is the
+  same payment method inside the same four-hour window, and one device is shared across 25
+  accounts while every other device is 1:1. A model scoring near-perfect here has learned the
+  generator, not fraud — so the reported model is the one trained *without* the promo leak.
+- **RAG buys traceability, not precision.** Each SOP has only four chunks, so with top-k 3 and a
+  `doc_id` filter a citation list is effectively "three of the four sections of the right
+  document". The similarity threshold filters nothing at this corpus size.
+- **No SOP has a grey case in this data.** L3 is verified correct against its own spec; it is
+  *not* verified to make good decisions on hard ones. Only 6 of the 12 decision-matrix boxes are
+  reachable, because no SOP can emit a LOW risk level on this dataset.
+- **The shared-device ring costs 25 near-identical reports.** One customer = one case file means
+  no field anywhere says those 25 accounts belong to a single event.
 
 ## Repo structure
 
 ```
-config.py                     paths + all SOP thresholds
-data/                          read-only source CSVs
+config.py                      paths + all SOP thresholds
+data/                          read-only synthetic CSVs
 fraud_policy_docs/             L2 RAG corpus (SOP-001..004)
 src/
-  data_io.py                   generic load/parse
-  features/                    L1, case-specific feature builders
+  data_io.py                   generic load/parse + time-based split
+  features/                    L1 feature builders (transaction, SIM swap)
   detection/                   L1 baseline rules, model, evaluation
-  investigation/                L2 RAG retriever + pattern lookup
-  decision/                     L3 policy thresholds -> decision
-  reporting/                    L4 SOP-004 case file builder
-notebooks/                     named NN_<layer>_<topic>
-  01_L1_data_understanding.ipynb
-  02_L1_detection_baseline_and_model.ipynb
-  03_L2_sop_retriever_rag.ipynb
-  04_L2_pattern_lookup.ipynb
-outputs/                       notebook artifacts (gitignored)
+  investigation/               L2 RAG retriever + pattern lookup
+  decision/                    L3 policy thresholds -> decision
+  reporting/                   L4 SOP-004 case file + optional LLM narrative
+  pipeline/                    controller: LangGraph nodes + state, no domain logic
+app/                           view layer: Streamlit dashboard
+  views/                       overview / investigate / batch data / limitations
+notebooks/                     NN_<layer>_<topic>, one per derived module
+outputs/                       artifacts: MLflow db, Chroma index, models, case files (gitignored)
+tests/e2e/                     35 UAT tests: Streamlit AppTest + Playwright
 ```
-
-## Status
-
-- **L1 (Detection)** — baseline + model logic prototyped in `02_L1_detection_baseline_and_model.ipynb`
-  for the transaction fraud task (time-based split, Random Forest, MLflow-tracked). SIM-swap
-  section and migration into `src/` still pending.
-- **L2 (Investigation)** — both halves implemented and verified. `sop_retriever.py`: SOP corpus
-  → 13 section chunks → Chroma index → vector retrieval with SOP citations, plus a TF-IDF
-  baseline it is measured against; derived in `03_L2_sop_retriever_rag.ipynb`.
-  `pattern_lookup.py`: shared-device windows, promo redemption counts, complaint lookup, and
-  the customer evidence dict L3 consumes; derived in `04_L2_pattern_lookup.ipynb`.
-- **L3 (Decision) / L4 (Reporting)** — not yet built.
 
 ## Setup
 
-Python 3.11.9, virtualenv in `.venv`.
+Python 3.11.9.
 
 ```
 python -m venv .venv
@@ -73,5 +161,17 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Experiment tracking (MLflow) and the RAG vector store (Chroma) both run locally, no external
-services — see `CLAUDE.md` for tracking URI, persist paths, and Windows-specific version pins.
+Build the RAG index once (notebook `03_L2_sop_retriever_rag.ipynb`), then:
+
+```
+streamlit run app/main.py          # dashboard
+pytest tests/e2e -m "not slow"     # E2E suite, no API calls
+mlflow ui --backend-store-uri "sqlite:///outputs/mlflow.db" --workers 1
+```
+
+The optional L4 narrative needs `OPENAI_API_KEY` in `.env`; without it the case file is still
+written, just without the narrative section. MLflow and Chroma both run locally — no hosted
+services anywhere in this repo.
+
+> **Windows note:** `import chromadb` must run before `import pandas`, and `mlflow ui` needs
+> `--workers 1`. Both were found by failing runs; details in `CLAUDE.md`.
