@@ -14,3 +14,39 @@ mlflow==3.14.0
 # load. Neither problem exists on Colab/Linux -- the pins just keep local runs identical.
 chromadb==0.6.3
 onnxruntime==1.20.1
+
+# Pipeline orchestration (L1->L4 controller, src/pipeline/). Verified on Windows 2026-08-21,
+# not guessed: installing this changes NO existing pin -- chromadb, onnxruntime, pandas, numpy,
+# scikit-learn and pydantic are all left untouched, only new packages are added. It is also
+# neutral to the chromadb-before-pandas rule above: build_sop_index() survived an upsert with
+# langgraph imported both before and after chromadb.
+langgraph==1.2.11
+
+# L4 Reporting: LLM narrative summary (reporting/narrative.py). Verified on Windows
+# 2026-08-25: installing it moved NO existing pin (chromadb 0.6.3, onnxruntime 1.20.1,
+# pandas 2.0.3, numpy 1.26.4, scikit-learn 1.3.2, pydantic 2.13.4, langgraph 1.2.11 all
+# unchanged), and build_sop_index() still upserts fine with openai imported alongside
+# chromadb -- so the chromadb-before-pandas rule is unaffected.
+# The API key is read from the OPENAI_API_KEY env var, never committed.
+openai==3.3.1
+# Notebook 08 reads the key from a .env file. Already present as an mlflow dependency,
+# pinned here because the notebook imports it directly and Colab does not ship it.
+python-dotenv==1.2.2
+
+# View layer (app/, Streamlit dashboard). Verified on Windows 2026-08-26: installing it
+# moved NO existing pin -- chromadb 0.6.3, onnxruntime 1.20.1, pandas 2.0.3, numpy 1.26.4,
+# scikit-learn 1.3.2, pydantic 2.13.4, langgraph 1.2.11 and openai 3.3.1 are all unchanged;
+# only new packages were added (altair, pydeck, narwhals, jsonschema, watchdog, toml).
+# CAVEAT that does not apply to the notebooks: `streamlit run` imports pandas before the
+# first line of app/main.py, so the chromadb-before-pandas rule cannot be satisfied inside
+# a Streamlit process. app/resources.py therefore never calls upsert() -- it checks the
+# index is already populated and stops with a readable message if it is not. Queries are
+# unaffected.
+streamlit==1.62.0
+
+# UAT / end-to-end tests (tests/e2e/). Same verification: no existing pin moved.
+# playwright needs its browser downloaded once, outside pip:
+#   .venv\Scripts\python.exe -m playwright install chromium
+pytest==9.1.1
+playwright==1.62.0
+pytest-playwright==0.9.0

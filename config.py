@@ -27,6 +27,7 @@ SIM_SWAP_LOGIN_CHANGE_HOURS_THRESHOLD = 2  # proxy via hours_since_last_login_ch
 SIM_SWAP_DEVICE_CHANGES_12MO_THRESHOLD = 2
 SIM_SWAP_VERIFY_HOLD_HOURS = 1   # 1 indicator -> verify and hold
 SIM_SWAP_ESCALATE_MINUTES = 30   # 2+ indicators -> HIGH, block and escalate within this window
+SIM_SWAP_INDICATORS_HIGH = 2     # the "2+" itself: cut-off used by the L1 SOP-001 rule baseline
 
 # --- SOP-002 Topup / Voucher ---
 SHARED_DEVICE_ACCOUNTS_MEDIUM = 2   # same device/instrument across 2 accounts/24h = MEDIUM
@@ -108,6 +109,12 @@ L1_SCORE_BANDS = {
 # it. Case files are generated artifacts, never edited by hand -- regenerate instead.
 CASE_FILE_DIR = os.path.join(OUTPUT_DIR, "case_files")
 
+# --- L1 Detection: persisted models ---
+# Ditulis dari notebook 02 lewat joblib, dibaca lagi sama detection.model.load_model().
+# Artefak yang digenerate ulang, sama kayak case file -- ada di outputs/, nggak di-commit.
+TRANSACTION_MODEL_PATH = os.path.join(OUTPUT_DIR, "transaction_fraud_model.pkl")
+SIM_SWAP_MODEL_PATH = os.path.join(OUTPUT_DIR, "sim_swap_fraud_model.pkl")
+
 # --- MLflow experiment tracking (L1) ---
 # SQLite backend, not the older file-based one: MLflow 3.x put the filesystem tracking
 # store in maintenance mode (it raises unless MLFLOW_ALLOW_FILE_STORE=true), and the
@@ -129,3 +136,15 @@ MLFLOW_ARTIFACT_URI = pathlib.Path(MLFLOW_ARTIFACTS_DIR).as_uri()
 # comparison table meaningless.
 MLFLOW_EXPERIMENT_SIM_SWAP = "sim_swap_detection"
 MLFLOW_EXPERIMENT_TRANSACTION = "transaction_detection"
+
+# --- L4 Reporting: LLM narrative summary (reporting.narrative) ---
+# Optional layer on top of the SOP-004 case file: one English paragraph in a
+# `narrative_summary` field, generated from the finished case dict. It never touches
+# `risk_level` or `recommended_action` -- those stay copies of the L3 Decision.
+# The API key is read from the OPENAI_API_KEY environment variable, never from here.
+OPENAI_MODEL = "gpt-4o-mini"
+OPENAI_TIMEOUT_SECONDS = 30.0
+
+# Word budget for the narrative. A case file is skimmed by a reviewer who then reads the
+# structured fields -- a long paragraph competes with the fields instead of introducing them.
+NARRATIVE_MAX_WORDS = 120
