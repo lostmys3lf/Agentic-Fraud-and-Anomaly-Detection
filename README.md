@@ -7,37 +7,9 @@ auditable case file — orchestrated with LangGraph and served as a Streamlit de
 Built on a **synthetic** labeled dataset. Personal learning / DS-AI mentoring project, not
 production software.
 
-![Dashboard overview](assets/dashboard_overview.png)
+![Solution architecture](assets/architecture.png)
 
 ## Flow
-
-```mermaid
-flowchart LR
-    A[customer_id] --> L1
-
-    subgraph L1["L1 · Detect"]
-        direction TB
-        L1a["Random Forest<br/>transaction scorer"]
-        L1b["SOP-001 rule<br/>SIM-swap indicators"]
-    end
-
-    subgraph L2["L2 · Investigate"]
-        direction TB
-        L2a["RAG over SOP corpus<br/>Chroma + MiniLM"]
-        L2b["Pattern lookup<br/>shared device / promo / complaints"]
-    end
-
-    subgraph L3["L3 · Decide"]
-        L3a["L1 band x L2 risk matrix<br/>deterministic, no LLM"]
-    end
-
-    subgraph L4["L4 · Report"]
-        L4a["SOP-004 case file<br/>+ LLM narrative (prose only)"]
-    end
-
-    L1 --> L2 --> L3 --> L4 --> R["Auto-Approve / Escalate / Block<br/>.json + .md case file"]
-    L1 -. unknown customer .-> E[handle_error]
-```
 
 - **L1 Detection** — ML / rule scoring producing a confidence score per customer.
 - **L2 Investigation** — RAG over `fraud_policy_docs/` (SOP-001..004) plus historical pattern lookup.
@@ -45,6 +17,26 @@ flowchart LR
 - **L4 Reporting** — compiles a structured, auditable case file in SOP-004 format.
 
 Fraud types in scope: shared-device topup rings, SIM-swap account takeover, promo abuse.
+
+## Dashboard
+
+`streamlit run app/main.py` — overview first, then drill down into one customer.
+
+**Overview** — batch KPIs, action distribution, and the confidence-score histogram with both
+`config.py` cut points drawn on it.
+
+![Overview page](assets/dashboard_overview.png)
+
+**Investigate** — the decision leads: banner, risk level, L1 band, L2 risk level, and the
+`Why:` trace naming every SOP section that fired. The paragraph above it is the LLM narrative,
+written from the finished case file and unable to change either field below it.
+
+![Investigate page](assets/investigate_decision.png)
+
+**Evidence** — each layer's raw inputs sit in collapsed expanders, with the SOP thresholds shown
+next to the values they are compared against, so a reviewer can disagree with the decision.
+
+![L2 evidence expander](assets/investigate_evidence_l2.png)
 
 ## Design decisions worth knowing
 
