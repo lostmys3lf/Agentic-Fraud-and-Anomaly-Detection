@@ -32,7 +32,17 @@ WORKDIR /srv
 # satu baris di render.py, pip install ulang dari nol (~5 menit). Dipisah begini, pip cuma
 # jalan lagi kalau requirements-app.txt-nya sendiri yang berubah.
 COPY requirements-app.txt ./
-RUN pip install --no-cache-dir -r requirements-app.txt
+# `pip uninstall` digabung ke RUN yang sama, BUKAN baris RUN sendiri. Layer di Docker itu
+# cuma nambah, nggak pernah ngurangin: kalau uninstall-nya di baris terpisah, paketnya masih
+# nempel utuh di layer sebelumnya dan image-nya nggak ngecil sedikit pun.
+#
+# Dua paket ini kebawa cuma sebagai dependency deklaratif, dan udah diuji nggak kepakai
+# (pipeline L1-L4 + semua import app/ tetap lolos tanpa mereka), 164 MB:
+#   kubernetes (84 MB) - dep chromadb, buat deploy mode server. Kita pakai in-process.
+#   sympy      (80 MB) - dep onnxruntime, buat symbolic shape inference. Inference biasa
+#                        nggak nyentuh itu.
+# Kalau nanti pin chromadb/onnxruntime naik, UJI ULANG -- jangan diasumsikan masih aman.
+RUN pip install --no-cache-dir -r requirements-app.txt  && pip uninstall -y kubernetes sympy
 
 # --- Layer 2: kode + data ----------------------------------------------------------------
 # config.py naruh PROJECT_ROOT = dirname(__file__), dan app/bootstrap.py naruh PROJECT_ROOT =
@@ -80,7 +90,9 @@ USER appuser
 # total kalau instance-nya kena batasan network keluar. Dipanggil di sini biar cache-nya
 # ikut ke-bake jadi layer image. Ditaruh SESUDAH `USER appuser` supaya HOME-nya
 # /home/appuser, jadi cache-nya kebaca sama proses yang nanti beneran jalan.
-RUN python -c "from chromadb.utils import embedding_functions; embedding_functions.DefaultEmbeddingFunction()(['warmup'])"
+# `rm` tar.gz-nya digabung di RUN yang sama, alasan yang sama kayak pip uninstall di atas.
+# Chroma nyimpen arsip 79 MB itu di sebelah hasil ekstraknya dan nggak pernah baca lagi.
+RUN python -c "from chromadb.utils import embedding_functions; embedding_functions.DefaultEmbeddingFunction()(['warmup'])"  && rm -f /home/appuser/.cache/chroma/onnx_models/all-MiniLM-L6-v2/onnx.tar.gz
 
 # Cloud Run nyuntik $PORT sendiri; default ini cuma biar `docker run` lokal enak.
 ENV PORT=8080
