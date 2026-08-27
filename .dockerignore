@@ -1,0 +1,46 @@
+# Apa yang TIDAK ikut ke build context.
+#
+# `docker build .` nge-upload seluruh isi folder ini ke daemon dulu sebelum baris pertama
+# Dockerfile jalan. Tanpa file ini yang keangkut 1.5 GB (99%-nya .venv), padahal yang
+# kepakai cuma ~7 MB. File ini murni soal kecepatan build + ukuran image.
+#
+# Catatan: ini BUKAN .gitignore. Docker nggak pernah baca .gitignore, dan sebaliknya.
+# Jadi outputs/chroma_sop_index/ yang sengaja nggak di-push ke GitHub tetap ikut ke image.
+
+# Virtualenv lokal: 1.5 GB, dan isinya paket buat Windows. Di image nanti pip install ulang
+# buat Linux, jadi ini bukan cuma gede, tapi juga salah platform.
+.venv/
+
+# Riwayat git nggak dibutuhin container buat jalan.
+.git/
+.gitignore
+
+# Bahan belajar & turunan, bukan bagian dari app yang jalan.
+notebooks/
+docs/
+tests/
+assets/
+README.md
+CLAUDE.md
+Dockerfile
+.dockerignore
+
+# Artifact yang sengaja nggak masuk image (lihat daftar COPY di Dockerfile).
+# mlflow = experiment tracking lokal, case_files = output yang digenerate ulang saat runtime.
+outputs/mlflow.db
+outputs/mlartifacts/
+outputs/case_files/
+outputs/*_clean.csv
+outputs/*.png
+outputs/threshold_sweep_*.csv
+
+# RAHASIA. Key diinjeksi pas runtime lewat --env-file / Secret Manager, jangan pernah
+# nempel di layer image -- siapa pun yang bisa narik image-nya bisa baca lewat docker history.
+.env
+.env.*
+
+# Sampah cache.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/

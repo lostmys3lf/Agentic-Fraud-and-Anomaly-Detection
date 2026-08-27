@@ -1,0 +1,33 @@
+# Dependency RUNTIME buat container app/ saja. requirements.txt tetap kontrak utama repo
+# (dev + notebook); file ini subset-nya, dan pin-nya WAJIB sama persis -- kalau beda, model
+# .pkl yang di-training pakai scikit-learn 1.3.2 bisa gagal di-unpickle tanpa error jelas.
+#
+# Daftarnya diturunin dari import beneran di app/ dan src/, bukan ditebak:
+#   grep -rhoE "^\s*(import|from)\s+\w+" app/ src/ --include=*.py | sort -u
+# Hasilnya: altair, chromadb, dotenv, joblib, langgraph, openai, pandas, sklearn, streamlit.
+#
+# Yang SENGAJA dibuang karena cuma kepakai di notebook/tes, dan berat:
+#   mlflow, shap, matplotlib, seaborn, ipykernel, pytest, playwright, pytest-playwright.
+
+pandas==2.0.3
+numpy==1.26.4
+scikit-learn==1.3.2
+
+# L2 RAG. Dua pin ini alasannya Windows (lihat requirements.txt), dan di Linux nggak ada
+# masalahnya -- tapi tetep dikunci sama biar container ngasih hasil identik sama lokal.
+chromadb==0.6.3
+onnxruntime==1.20.1
+
+langgraph==1.2.11
+
+# L4 narrative. Key-nya dari env var OPENAI_API_KEY, nggak pernah dari file.
+openai==3.3.1
+python-dotenv==1.2.2
+
+# View layer. altair ditulis eksplisit walau ikut kebawa streamlit, soalnya app/ ngimport
+# dia langsung -- dependency langsung nggak boleh nebeng dependency orang lain.
+# Sama buat joblib (dipakai src/detection/model.py buat load .pkl), yang aslinya cuma
+# nebeng scikit-learn. Versinya diambil dari .venv lokal, bukan ditebak.
+streamlit==1.62.0
+altair==6.2.2
+joblib==1.5.3
