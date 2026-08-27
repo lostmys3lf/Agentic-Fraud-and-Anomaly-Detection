@@ -12,8 +12,30 @@
 # Notebooks kept local only (per user request)
 /notebooks/
 
-# All notebook/pipeline artifacts: MLflow db + artifacts, Chroma index, model pickles
-/outputs/
+# Semua artifact notebook/pipeline default-nya di-ignore.
+# Ditulis /outputs/* (isinya), bukan /outputs/ (foldernya) -- git nggak bisa nge-un-ignore
+# file kalau folder induknya sendiri yang ke-ignore, jadi baris `!` di bawah bakal mati total.
+/outputs/*
+
+# Pengecualian: yang di bawah ini ikut ke-push.
+# Aturannya cuma satu -- masuk git kalau NGGAK bisa dibikin ulang dari isi repo ini.
+
+# Ringkasan batch L1-L4. Kecil, text, bisa di-diff, dan halaman batch di app/ cuma baca
+# file ini; recompute-nya 1200 customer = 1200 API call, jadi harus ikut ke repo.
+!/outputs/pipeline_run.csv
+!/outputs/l3_decision_report.csv
+!/outputs/l4_case_summary.csv
+
+# Model L1. /notebooks/ di-ignore, jadi orang yang clone repo ini nggak punya cara retrain.
+# Ini satu-satunya binary yang layak masuk git.
+!/outputs/transaction_fraud_model.pkl
+!/outputs/sim_swap_fraud_model.pkl
+
+# Yang sengaja TETAP di-ignore, biar nggak bingung nanti:
+#   chroma_sop_index/  -> bisa dibangun ulang dari fraud_policy_docs/ + sop_retriever.py
+#   mlflow.db, mlartifacts/ -> jejak eksperimen lokal, berubah tiap run
+#   case_files/        -> output pipeline, regenerable
+#   *_clean.csv        -> turunan dari data/ yang sudah ke-track
 
 # Python bytecode/cache
 __pycache__/
