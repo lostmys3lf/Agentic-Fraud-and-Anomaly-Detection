@@ -4,7 +4,8 @@
 #
 # Daftarnya diturunin dari import beneran di app/ dan src/, bukan ditebak:
 #   grep -rhoE "^\s*(import|from)\s+\w+" app/ src/ --include=*.py | sort -u
-# Hasilnya: altair, chromadb, dotenv, joblib, langgraph, openai, pandas, sklearn, streamlit.
+# Hasilnya: altair, chromadb, dotenv, importlib_metadata, joblib, langgraph, openai,
+# pandas, sklearn, streamlit.
 #
 # Yang SENGAJA dibuang karena cuma kepakai di notebook/tes, dan berat:
 #   mlflow, shap, matplotlib, seaborn, ipykernel, pytest, playwright, pytest-playwright.
@@ -17,6 +18,10 @@ scikit-learn==1.3.2
 # masalahnya -- tapi tetep dikunci sama biar container ngasih hasil identik sama lokal.
 chromadb==0.6.3
 onnxruntime==1.20.1
+# Diimport LANGSUNG di src/investigation/sop_retriever.py:33. Di lokal dia kebawa
+# transitif lewat paket lain, jadi nggak keliatan hilang -- di image ketahuan langsung
+# ModuleNotFoundError. Ini persis kenapa subset requirements harus diuji, bukan ditebak.
+importlib-metadata==9.0.0
 
 langgraph==1.2.11
 
